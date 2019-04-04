@@ -171,7 +171,7 @@ p "homu".public_send(:twice) # NG
   * `obj.method(:hoge)` が `obj.:hoge`
 * [`@1` 記法(numbered parameters)](https://bugs.ruby-lang.org/issues/4475)
   * `(1..10).map { @1 * 2 }` \
-  * `(1..10).inject { @1 + @2 }` 
+  * `(1..10).inject { @1 + @2 }`
   * すでに trunk には入っているが議論は続いている
   * https://bugs.ruby-lang.org/issues/15723
 * 先端無限Range
@@ -180,12 +180,18 @@ p "homu".public_send(:twice) # NG
 ---
 
 
-### おまけ3：`Time#ciel` のユースケース募集
-
-
-
-
+### おまけ3：
+### `Time#ciel` のユースケース募集
 - - -
+
+```ruby
+time = Time.utc(2010, 3, 30, 5, 43, "25.0123456789".to_r)
+
+time.ceil(0).iso8601(10)  #=> "2010-03-30T05:43:26.0000000000Z"
+time.ceil(1).iso8601(10)  #=> "2010-03-30T05:43:25.1000000000Z"
+time.ceil(2).iso8601(10)  #=> "2010-03-30T05:43:25.0200000000Z"
+time.ceil(3).iso8601(10)  #=> "2010-03-30T05:43:25.0130000000Z"
+```
 
 ---
 
@@ -194,15 +200,11 @@ p "homu".public_send(:twice) # NG
 * Ruby の開発プロセスについて簡単に説明しました
 * メーリングリストを見てると面白い議論が流れてくる
 * Ruby を Hack したいなら Ruby Hack Challenge に参加してみよう
-* Time#floor みたいに「ほしい！」と思ったメソッドを提案してみると案外すんなり採用されるかも  
+* Time#floor みたいに「ほしい！」と思ったメソッドを提案してみると案外すんなり採用されるかも
 
 
 ---
 
+
 ## ご清聴
 ## ありがとうございました
-
-
-
-https://bugs.ruby-lang.org/issues/15723
-https://bugs.ruby-lang.org/issues/14799
